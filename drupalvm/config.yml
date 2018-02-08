@@ -1,0 +1,54 @@
+alias_local: '@cse.local'
+alias_remote: '@cse.dev'
+
+branch: master
+env: dev
+
+vagrant_hostname: cse.local
+vagrant_machine_name: cse 
+vagrant_ip: 192.168.88.192
+
+drupal_site_name: "College of Science & Engineering"
+drupal_enable_modules: []
+drupal_account_name: admin
+drupal_account_pass: admin
+
+drupal_build_composer_project: false
+drupal_build_composer: true
+drupal_composer_path: false
+drupal_composer_install_dir: "/var/www/drupalvm"
+drupal_core_path: "{{ drupal_composer_install_dir }}/web"
+drupal_enabled_modules: []
+
+vagrant_plugins:
+ - name: vagrant-vbguest
+ - name: vagrant-hostsupdater
+
+# The web server software to use. Can be either 'apache' or 'nginx'.
+drupalvm_webserver: nginx
+
+# Set this to 'false' if you don't need to install drupal (using the drupal_*
+# settings below), but instead copy down a database (e.g. using drush sql-sync).
+drupal_install_site: true
+configure_drush_aliases: true
+
+# Required Drupal settings.
+drupal_core_path: "{{ drupal_composer_install_dir }}/web"
+drupal_core_owner: "{{ drupalvm_user }}"
+drupal_db_user: drupal
+drupal_db_password: drupal
+drupal_db_name: drupal
+drupal_db_host: localhost
+
+
+
+# Settings for installing a Drupal site if 'drupal_install_site:' is 'true'.
+drupal_major_version: 8
+drupal_domain: "{{ vagrant_hostname }}"
+drupal_site_name: "Drupal"
+drupal_install_profile: standard
+drupal_account_name: admin
+drupal_account_pass: admin
+
+# Additional arguments or options to pass to `drush site-install`.
+drupal_site_install_extra_args: []
